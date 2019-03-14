@@ -21,7 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Naraki\\Elasticsearch\\ServiceProvider"
+                "Naraki\\ElasticSearch\\ServiceProvider"
             ],
             "aliases": {
                 "ElasticSearch": "Naraki\\ElasticSearch\\Facades\\ElasticSearch",

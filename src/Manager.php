@@ -1,8 +1,8 @@
-<?php namespace Naraki\ElasticSearch;
+<?php namespace Naraki\Elasticsearch;
 
 /**
- * @method static \Naraki\ElasticSearch\DSL\SearchBuilder search()
- * @method static \Naraki\ElasticSearch\DSL\SuggestionBuilder suggest()
+ * @method static \Naraki\Elasticsearch\DSL\SearchBuilder search()
+ * @method static \Naraki\Elasticsearch\DSL\SuggestionBuilder suggest()
  */
 class Manager
 {
@@ -27,7 +27,7 @@ class Manager
     }
 
     /**
-     * @return \Naraki\ElasticSearch\Connection
+     * @return \Naraki\Elasticsearch\Connection
      */
     public function connection()
     {
@@ -39,7 +39,7 @@ class Manager
     }
 
     /**
-     * @return \Naraki\ElasticSearch\Manager
+     * @return \Naraki\Elasticsearch\Manager
      */
     public function manager()
     {

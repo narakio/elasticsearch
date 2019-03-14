@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Contracts;
+<?php namespace Naraki\Elasticsearch\Contracts;
 
 interface Searchable
 {

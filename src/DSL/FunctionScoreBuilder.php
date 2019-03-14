@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\DSL;
+<?php namespace Naraki\Elasticsearch\DSL;
 
 use ONGR\ElasticsearchDSL\Query\Compound\FunctionScoreQuery;
 

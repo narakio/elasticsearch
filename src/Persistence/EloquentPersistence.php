@@ -1,13 +1,13 @@
 <?php
 
-namespace Naraki\ElasticSearch\Persistence;
+namespace Naraki\Elasticsearch\Persistence;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Naraki\ElasticSearch\Connection;
-use Naraki\ElasticSearch\Exception\InvalidArgumentException;
-use Naraki\ElasticSearch\Exception\MissingArgumentException;
-use Naraki\ElasticSearch\Searchable;
+use Naraki\Elasticsearch\Connection;
+use Naraki\Elasticsearch\Exception\InvalidArgumentException;
+use Naraki\Elasticsearch\Exception\MissingArgumentException;
+use Naraki\Elasticsearch\Searchable;
 
 class EloquentPersistence
 {

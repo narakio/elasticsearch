@@ -1,6 +1,6 @@
-<?php namespace Naraki\ElasticSearch\Index;
+<?php namespace Naraki\Elasticsearch\Index;
 
-use Naraki\ElasticSearch\Exception\InvalidArgumentException;
+use Naraki\Elasticsearch\Exception\InvalidArgumentException;
 
 class Analysis
 {

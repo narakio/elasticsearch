@@ -1,7 +1,7 @@
-<?php namespace Naraki\ElasticSearch\Index;
+<?php namespace Naraki\Elasticsearch\Index;
 
-use Naraki\ElasticSearch\Connection;
-use Naraki\ElasticSearch\Results\IndexingResult;
+use Naraki\Elasticsearch\Connection;
+use Naraki\Elasticsearch\Results\IndexingResult;
 
 /**
  * Builder for
@@ -12,7 +12,7 @@ class Builder
     /**
      * Plastic connection instance.
      *
-     * @var \Naraki\ElasticSearch\Connection
+     * @var \Naraki\Elasticsearch\Connection
      */
     protected $connection;
 

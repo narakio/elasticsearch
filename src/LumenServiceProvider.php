@@ -1,9 +1,8 @@
-<?php namespace Naraki\ElasticSearch;
+<?php namespace Naraki\Elasticsearch;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application;
-use Naraki\ElasticSearch\Facades\ElasticSearchIndex;
-use Naraki\ElasticSearch\Manager as ElasticSearchManager;
+use Naraki\Elasticsearch\Manager as ElasticSearchManager;
 
 class LumenServiceProvider extends ServiceProvider
 {
@@ -32,7 +31,7 @@ class LumenServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app['router']->group([
-            'namespace' => 'Naraki\ElasticSearch\Controllers',
+            'namespace' => 'Naraki\Elasticsearch\Controllers',
         ], function ($r) {
             $r->get('/search/{input}', ['uses' => 'Search@get']);
             $r->post('/search[/{source}]', ['uses' => 'Search@post']);

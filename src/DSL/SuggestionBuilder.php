@@ -1,8 +1,8 @@
-<?php namespace Naraki\ElasticSearch\DSL;
+<?php namespace Naraki\Elasticsearch\DSL;
 
 use ONGR\ElasticsearchDSL\Search as Query;
 use ONGR\ElasticsearchDSL\Suggest\Suggest;
-use Naraki\ElasticSearch\Connection;
+use Naraki\Elasticsearch\Connection;
 
 class SuggestionBuilder
 {

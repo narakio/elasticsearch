@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Results;
+<?php namespace Naraki\Elasticsearch\Results;
 
 use Illuminate\Support\Collection;
 
@@ -88,7 +88,7 @@ class SearchResult
     /**
      * @param array $results
      * @param string $model
-     * @return \Naraki\ElasticSearch\Results\SearchResult
+     * @return \Naraki\Elasticsearch\Results\SearchResult
      */
     public static function toModel(array $results, string $model): self
     {

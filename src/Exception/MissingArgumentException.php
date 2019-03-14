@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Exception;
+<?php namespace Naraki\Elasticsearch\Exception;
 
 class MissingArgumentException extends \InvalidArgumentException
 {

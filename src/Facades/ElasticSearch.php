@@ -1,10 +1,10 @@
-<?php namespace Naraki\ElasticSearch\Facades;
+<?php namespace Naraki\Elasticsearch\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \Naraki\ElasticSearch\DSL\SearchBuilder search()
- * @method static \Naraki\ElasticSearch\DSL\SuggestionBuilder suggest()
+ * @method static \Naraki\Elasticsearch\DSL\SearchBuilder search()
+ * @method static \Naraki\Elasticsearch\DSL\SuggestionBuilder suggest()
  */
 class ElasticSearch extends Facade
 {

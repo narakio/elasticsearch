@@ -1,7 +1,7 @@
-<?php namespace Naraki\ElasticSearch\Index;
+<?php namespace Naraki\Elasticsearch\Index;
 
-use Naraki\ElasticSearch\Facades\ElasticSearchIndex;
-use Naraki\ElasticSearch\Results\IndexingResult;
+use Naraki\Elasticsearch\Facades\ElasticSearchIndex;
+use Naraki\Elasticsearch\Results\IndexingResult;
 
 class Seeder
 {
@@ -21,7 +21,7 @@ class Seeder
 
     /**
      * @param $data
-     * @return \Naraki\ElasticSearch\Results\IndexingResult
+     * @return \Naraki\Elasticsearch\Results\IndexingResult
      */
     public function bulk($data): ?IndexingResult
     {

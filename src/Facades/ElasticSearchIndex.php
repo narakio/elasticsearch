@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Facades;
+<?php namespace Naraki\Elasticsearch\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

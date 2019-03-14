@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Controllers;
+<?php namespace Naraki\Elasticsearch\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -6,7 +6,7 @@ use Illuminate\Http\Response;
 class Search extends Controller
 {
     /**
-     * @var \Naraki\ElasticSearch\Manager
+     * @var \Naraki\Elasticsearch\Manager
      */
     private $es;
 
@@ -58,7 +58,7 @@ class Search extends Controller
     /**
      * @param string $input
      * @param int $size
-     * @return \Naraki\ElasticSearch\Results\Paginator
+     * @return \Naraki\Elasticsearch\Results\Paginator
      */
     private function searchBlogPaginate($input, $size=8)
     {

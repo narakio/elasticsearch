@@ -1,6 +1,6 @@
-<?php namespace Naraki\ElasticSearch\Index;
+<?php namespace Naraki\Elasticsearch\Index;
 
-use Naraki\ElasticSearch\Exception\InvalidArgumentException;
+use Naraki\Elasticsearch\Exception\InvalidArgumentException;
 
 class Analyzer
 {
@@ -102,7 +102,7 @@ class Analyzer
 
 
     /**
-     * @return \Naraki\ElasticSearch\Index\Filter
+     * @return \Naraki\Elasticsearch\Index\Filter
      */
     public function getFilters(): Filter
     {
@@ -110,7 +110,7 @@ class Analyzer
     }
 
     /**
-     * @return \Naraki\ElasticSearch\Index\CharFilter
+     * @return \Naraki\Elasticsearch\Index\CharFilter
      */
     public function getCharFilters(): CharFilter
     {

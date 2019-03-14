@@ -1,11 +1,11 @@
 <?php
 
-namespace Naraki\ElasticSearch;
+namespace Naraki\Elasticsearch;
 
-use Naraki\ElasticSearch\DSL\SearchBuilder;
-use Naraki\ElasticSearch\DSL\SuggestionBuilder;
-use Naraki\ElasticSearch\Index\Builder as IndexBuilder;
-use Naraki\ElasticSearch\Persistence\EloquentPersistence;
+use Naraki\Elasticsearch\DSL\SearchBuilder;
+use Naraki\Elasticsearch\DSL\SuggestionBuilder;
+use Naraki\Elasticsearch\Index\Builder as IndexBuilder;
+use Naraki\Elasticsearch\Persistence\EloquentPersistence;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Elasticsearch\Endpoints\Suggest;
@@ -38,7 +38,7 @@ class Connection
     }
 
     /**
-     * @return \Naraki\ElasticSearch\Index\Builder
+     * @return \Naraki\Elasticsearch\Index\Builder
      */
     public function getIndexBuilder()
     {

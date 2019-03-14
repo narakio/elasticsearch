@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Results;
+<?php namespace Naraki\Elasticsearch\Results;
 
 use Illuminate\Support\Collection;
 

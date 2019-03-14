@@ -1,8 +1,8 @@
-<?php namespace Naraki\ElasticSearch;
+<?php namespace Naraki\Elasticsearch;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use Naraki\ElasticSearch\Commands\Index;
-use Naraki\ElasticSearch\Manager as ElasticSearchManager;
+use Naraki\Elasticsearch\Commands\Index;
+use Naraki\Elasticsearch\Manager as ElasticSearchManager;
 
 class ServiceProvider extends LaravelServiceProvider
 {

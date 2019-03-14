@@ -12,20 +12,16 @@
     "minimum-stability": "stable",
     "require": {
         "ongr/elasticsearch-dsl": "^6.0",
-        "elasticsearch/elasticsearch": "^6.1",
-        "illuminate/support": "5.8.*",
-        "illuminate/console": "5.8.*",
-        "illuminate/http": "5.8.*",
-        "illuminate/database": "5.8.*"
+        "elasticsearch/elasticsearch": "^6.1"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Naraki\\ElasticSearch\\ServiceProvider"
+                "Naraki\\Elasticsearch\\ServiceProvider"
             ],
             "aliases": {
-                "ElasticSearch": "Naraki\\ElasticSearch\\Facades\\ElasticSearch",
-                "ElasticSearchIndex": "Naraki\\ElasticSearch\\Facades\\ElasticSearchIndex"
+                "ElasticSearch": "Naraki\\Elasticsearch\\Facades\\ElasticSearch",
+                "ElasticSearchIndex": "Naraki\\Elasticsearch\\Facades\\ElasticSearchIndex"
             }
         }
     }

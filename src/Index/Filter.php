@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Index;
+<?php namespace Naraki\Elasticsearch\Index;
 
 class Filter
 {

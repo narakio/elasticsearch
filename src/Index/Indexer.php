@@ -1,4 +1,4 @@
-<?php namespace Naraki\ElasticSearch\Index;
+<?php namespace Naraki\Elasticsearch\Index;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;

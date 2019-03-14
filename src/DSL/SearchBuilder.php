@@ -1,10 +1,10 @@
-<?php namespace Naraki\ElasticSearch\DSL;
+<?php namespace Naraki\Elasticsearch\DSL;
 
 use App\Contracts\Searchable;
-use Naraki\ElasticSearch\Connection;
-use Naraki\ElasticSearch\Exception\InvalidArgumentException;
-use Naraki\ElasticSearch\Results\Paginator;
-use Naraki\ElasticSearch\Results\SearchResult;
+use Naraki\Elasticsearch\Connection;
+use Naraki\Elasticsearch\Exception\InvalidArgumentException;
+use Naraki\Elasticsearch\Results\Paginator;
+use Naraki\Elasticsearch\Results\SearchResult;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Traits\Macroable;
 use ONGR\ElasticsearchDSL\Highlight\Highlight;
@@ -87,7 +87,7 @@ class SearchBuilder
     /**
      * Builder constructor.
      *
-     * @param \Naraki\ElasticSearch\Connection $connection
+     * @param \Naraki\Elasticsearch\Connection $connection
      * @param \ONGR\ElasticsearchDSL\Search $grammar
      */
     public function __construct(Connection $connection, Query $grammar)
@@ -101,7 +101,7 @@ class SearchBuilder
      *
      * @param string $type
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function type(string $type): self
     {
@@ -115,7 +115,7 @@ class SearchBuilder
      *
      * @param string $index
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function index($index): self
     {
@@ -129,7 +129,7 @@ class SearchBuilder
      *
      * @param string $model
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function model(string $model): self
     {
@@ -161,7 +161,7 @@ class SearchBuilder
      *
      * @param int $offset
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function from($offset): self
     {
@@ -175,7 +175,7 @@ class SearchBuilder
      *
      * @param int $limit
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function size($limit): self
     {
@@ -191,7 +191,7 @@ class SearchBuilder
      * @param null $order
      * @param array $parameters
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function sortBy($fields, $order = null, array $parameters = []): self
     {
@@ -211,7 +211,7 @@ class SearchBuilder
      *
      * @param $score
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function minScore($score): self
     {
@@ -223,7 +223,7 @@ class SearchBuilder
     /**
      * @param $source
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function setSource($source): self
     {
@@ -277,7 +277,7 @@ class SearchBuilder
      *
      * @param array | string $ids
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function ids($ids): self
     {
@@ -297,7 +297,7 @@ class SearchBuilder
      * @param string $term
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function term($field, $term, array $attributes = []): self
     {
@@ -315,7 +315,7 @@ class SearchBuilder
      * @param array $terms
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function terms($field, array $terms, array $attributes = []): self
     {
@@ -331,7 +331,7 @@ class SearchBuilder
      *
      * @param string|array $fields
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function exists($fields): self
     {
@@ -353,7 +353,7 @@ class SearchBuilder
      * @param string $value
      * @param float $boost
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function wildcard($field, $value, $boost = 1.0): self
     {
@@ -369,7 +369,7 @@ class SearchBuilder
      *
      * @param float|null $boost
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      *
      * @internal param $field
      */
@@ -389,7 +389,7 @@ class SearchBuilder
      * @param string $term
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function match($field, $term, array $attributes = []): self
     {
@@ -407,7 +407,7 @@ class SearchBuilder
      * @param string $term
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function multiMatch(array $fields, $term, array $attributes = []): self
     {
@@ -422,7 +422,7 @@ class SearchBuilder
      * @param string $field
      * @param string $term
      * @param array $attributes
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function matchPhrasePrefix($field, $term, array $attributes = []): self
     {
@@ -446,7 +446,7 @@ class SearchBuilder
      * @param array $values
      * @param array $parameters
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function geoBoundingBox($field, $values, array $parameters = []): self
     {
@@ -465,7 +465,7 @@ class SearchBuilder
      * @param mixed $location
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function geoDistance($field, $distance, $location, array $attributes = []): self
     {
@@ -483,7 +483,7 @@ class SearchBuilder
      * @param array $points
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function geoPolygon($field, array $points = [], array $attributes = []): self
     {
@@ -502,7 +502,7 @@ class SearchBuilder
      * @param array $coordinates
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function geoShape($field, $type, array $coordinates = [], array $attributes = []): self
     {
@@ -522,7 +522,7 @@ class SearchBuilder
      * @param string $term
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function prefix($field, $term, array $attributes = []): self
     {
@@ -539,7 +539,7 @@ class SearchBuilder
      * @param string $query
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function queryString($query, array $attributes = []): self
     {
@@ -556,7 +556,7 @@ class SearchBuilder
      * @param string $query
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function simpleQueryString($query, array $attributes = []): self
     {
@@ -577,7 +577,7 @@ class SearchBuilder
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function highlight(
         $fields = ['_all' => []],
@@ -607,7 +607,7 @@ class SearchBuilder
      * @param string $field
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function range(string $field, array $attributes = []): self
     {
@@ -625,7 +625,7 @@ class SearchBuilder
      * @param string $regex
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function regexp(string $field, string $regex, array $attributes = []): self
     {
@@ -643,7 +643,7 @@ class SearchBuilder
      * @param $term
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function commonTerm($field, $term, array $attributes = []): self
     {
@@ -661,7 +661,7 @@ class SearchBuilder
      * @param $term
      * @param array $attributes
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function fuzzy($field, $term, array $attributes = []): self
     {
@@ -679,7 +679,7 @@ class SearchBuilder
      * @param \Closure $closure
      * @param string $score_mode
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function nested($field, \Closure $closure, $score_mode = 'avg'): self
     {
@@ -701,7 +701,7 @@ class SearchBuilder
      *
      * @param \Closure $closure
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function aggregate(\Closure $closure): self
     {
@@ -719,7 +719,7 @@ class SearchBuilder
      * @param \Closure $closure
      * @param array $parameters
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function functions(\Closure $search, \Closure $closure, $parameters = []): self
     {
@@ -753,7 +753,7 @@ class SearchBuilder
 
     /**
      *
-     * @return \Naraki\ElasticSearch\Results\SearchResult
+     * @return \Naraki\Elasticsearch\Results\SearchResult
      */
     public function get(): SearchResult
     {
@@ -761,7 +761,7 @@ class SearchBuilder
     }
 
     /**
-     * @return \Naraki\ElasticSearch\Results\SearchResult
+     * @return \Naraki\Elasticsearch\Results\SearchResult
      */
     public function toModel(): SearchResult
     {
@@ -813,7 +813,7 @@ class SearchBuilder
      * @param int $limit
      *
      * @param bool $toModel
-     * @return \Naraki\ElasticSearch\Results\Paginator
+     * @return \Naraki\Elasticsearch\Results\Paginator
      */
     public function paginate($limit = 25, $toModel = true): Paginator
     {
@@ -843,7 +843,7 @@ class SearchBuilder
      *
      * @param $query
      *
-     * @return \Naraki\ElasticSearch\DSL\SearchBuilder
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function append($query)
     {

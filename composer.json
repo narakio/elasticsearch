@@ -9,7 +9,8 @@
             "email": "dev.naraki.io@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "ongr/elasticsearch-dsl": "^6.0",
         "elasticsearch/elasticsearch": "^6.1"

@@ -1,0 +1,32 @@
+{
+    "name": "naraki/elasticsearch",
+    "description": "ElasticSearch provider for the naraki platform",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruno D.C",
+            "email": "dev.naraki.io@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "ongr/elasticsearch-dsl": "^6.0",
+        "elasticsearch/elasticsearch": "^6.1",
+        "illuminate/support": "5.8.*",
+        "illuminate/console": "5.8.*",
+        "illuminate/http": "5.8.*",
+        "illuminate/database": "5.8.*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Naraki\\Elasticsearch\\ServiceProvider"
+            ],
+            "aliases": {
+                "ElasticSearch": "Naraki\\ElasticSearch\\Facades\\ElasticSearch",
+                "ElasticSearchIndex": "Naraki\\ElasticSearch\\Facades\\ElasticSearchIndex"
+            }
+        }
+    }
+}

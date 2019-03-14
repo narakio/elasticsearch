@@ -1,7 +1,7 @@
 {
     "name": "naraki/elasticsearch",
     "description": "ElasticSearch provider for the naraki platform",
-    "type": "library",
+    "keywords": ["laravel", "naraki"],
     "license": "MIT",
     "authors": [
         {
@@ -14,6 +14,11 @@
         "ongr/elasticsearch-dsl": "^6.0",
         "elasticsearch/elasticsearch": "^6.1"
     },
+  "autoload": {
+    "psr-4": {
+      "Naraki\\Elasticsearch\\": "src/"
+    }
+  },
     "extra": {
         "laravel": {
             "providers": [

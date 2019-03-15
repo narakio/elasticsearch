@@ -19,13 +19,12 @@ class Search extends Controller
      * @param string $source
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function post($source=null)
+    public function post($source = null)
     {
-//        throw new \Exception('ddd');
         $input = app('request')->get('q');
         if (!is_null($input && !empty($input))) {
             list($blog, $author, $tag) = [
-                is_null($source)?$this->searchBlog($input):$this->searchBlogPaginate($input),
+                is_null($source) ? $this->searchBlog($input) : $this->searchBlogPaginate($input),
                 $this->searchAuthor($input),
                 $this->searchTag($input)
             ];
@@ -37,7 +36,6 @@ class Search extends Controller
             ], Response::HTTP_OK);
         }
         return response(['status' => null, Response::HTTP_OK]);
-
     }
 
     /**
@@ -60,13 +58,12 @@ class Search extends Controller
      * @param int $size
      * @return \Naraki\Elasticsearch\Results\Paginator
      */
-    private function searchBlogPaginate($input, $size=8)
+    private function searchBlogPaginate($input, $size = 8)
     {
         return $this->es->search()
             ->index('naraki.blog_posts.en')
             ->type('main')
-            ->matchPhrasePrefix('title', strip_tags($input))->paginate($size,false);
-
+            ->matchPhrasePrefix('title', strip_tags($input))->paginateToSource($size);
     }
 
     /**

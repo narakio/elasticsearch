@@ -104,6 +104,22 @@ class SearchResult
     }
 
     /**
+     * @param array $results
+     * @return \Naraki\Elasticsearch\Results\SearchResult
+     */
+    public static function toSource(array $results)
+    {
+        $resultSelf = new self($results, false);
+        $sources = new Collection();
+        foreach ($results['hits']['hits'] as $result) {
+            $sources->push($result['_source']);
+        }
+        $resultSelf->setHits($sources);
+
+        return $resultSelf;
+    }
+
+    /**
      * Total Hits.
      *
      * @return int

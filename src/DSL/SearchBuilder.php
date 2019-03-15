@@ -769,6 +769,14 @@ class SearchBuilder
     }
 
     /**
+     * @return \Naraki\Elasticsearch\Results\SearchResult
+     */
+    public function source(): SearchResult
+    {
+        return SearchResult::toSource($this->getRaw());
+    }
+
+    /**
      *
      * @return string
      */
@@ -812,20 +820,37 @@ class SearchBuilder
      *
      * @param int $limit
      *
-     * @param bool $toModel
      * @return \Naraki\Elasticsearch\Results\Paginator
      */
-    public function paginate($limit = 25, $toModel = true): Paginator
+    public function paginate($limit = 25): Paginator
     {
         $page = $this->getCurrentPage();
-
         $this->from($limit * ($page - 1))->size($limit);
-
-        if ($toModel) {
-            return new Paginator($this->toModel(), $limit, $page);
-        }
-
         return new Paginator($this->get(), $limit, $page);
+    }
+
+    /**
+     * @param int $limit
+     * @return \Naraki\Elasticsearch\Results\Paginator
+     */
+    public function paginateToModel($limit = 25): Paginator
+    {
+        $page = $this->getCurrentPage();
+        $this->from($limit * ($page - 1))->size($limit);
+        return new Paginator($this->toModel(), $limit, $page);
+    }
+
+    /**
+     * Paginates but only returns index data, not elastic search metadata such as _score, _index, etc.
+     *
+     * @param int $limit
+     * @return \Naraki\Elasticsearch\Results\Paginator
+     */
+    public function paginateToSource($limit = 25): Paginator
+    {
+        $page = $this->getCurrentPage();
+        $this->from($limit * ($page - 1))->size($limit);
+        return new Paginator($this->source(), $limit, $page);
     }
 
     /**

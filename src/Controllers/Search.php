@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Naraki\Elasticsearch\DSL\SearchBuilder;
 
 class Search extends Controller
 {
@@ -9,6 +10,10 @@ class Search extends Controller
      * @var \Naraki\Elasticsearch\Manager
      */
     private $es;
+    /**
+     * @var int
+     */
+    private $size;
 
     public function __construct()
     {
@@ -22,9 +27,20 @@ class Search extends Controller
     public function post($source = null)
     {
         $input = app('request')->get('q');
+        $size = app('request')->get('size');
+        $sort = app('request')->get('sort');
+        $order = app('request')->get('order');
         if (!is_null($input && !empty($input))) {
             list($blog, $author, $tag) = [
-                is_null($source) ? $this->searchBlog($input) : $this->searchBlogPaginate($input),
+                is_null($source)
+                    ? $this->searchBlog(
+                    $input,
+                    (!is_null($size) && intval($size) <= 20)
+                        ? intval($size)
+                        : 4,
+                    $sort,
+                    $order)
+                    : $this->searchBlogPaginate($input, $sort, $order),
                 $this->searchAuthor($input),
                 $this->searchTag($input)
             ];
@@ -41,29 +57,34 @@ class Search extends Controller
     /**
      * @param string $input
      * @param int $size
+     * @param string $sort
+     * @param string $order
      * @return array
      */
-    private function searchBlog($input, $size = 4)
+    private function searchBlog($input, $size, $sort, $order)
     {
-        return $this->es->search()
+        $search = $this->es->search()
             ->index('naraki.blog_posts.en')
             ->type('main')
             ->from(0)
             ->size($size)
-            ->matchPhrasePrefix('title', strip_tags($input))->get()->source();
+            ->matchPhrasePrefix('title', strip_tags($input));
+        return $this->sort($search, $sort, $order)->get()->source();
     }
 
     /**
      * @param string $input
-     * @param int $size
+     * @param string $sort
+     * @param string $order
      * @return \Naraki\Elasticsearch\Results\Paginator
      */
-    private function searchBlogPaginate($input, $size = 8)
+    private function searchBlogPaginate($input, $sort, $order)
     {
-        return $this->es->search()
+        $search = $this->es->search()
             ->index('naraki.blog_posts.en')
             ->type('main')
-            ->matchPhrasePrefix('title', strip_tags($input))->paginateToSource($size);
+            ->matchPhrasePrefix('title', strip_tags($input));
+        return $this->sort($search, $sort, $order)->paginateToSource(8);
     }
 
     /**
@@ -94,5 +115,23 @@ class Search extends Controller
             ->from(0)
             ->size($size)
             ->matchPhrasePrefix('name', strip_tags($input))->get()->source();
+    }
+
+    /**
+     * @param \Naraki\Elasticsearch\DSL\SearchBuilder $searchObject
+     * @param string $field
+     * @param string $order
+     * @return mixed
+     */
+    private function sort($searchObject, $field, $order): SearchBuilder
+    {
+        $sortOptions = ['date' => true];
+        if (!is_null($field) && isset($sortOptions[$field])) {
+            return $searchObject->sortBy(
+                $field,
+                (!is_null($order) && strpos($order, 'asc,desc') !== false) ? $order : 'desc'
+            );
+        }
+        return $searchObject;
     }
 }

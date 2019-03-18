@@ -53,4 +53,22 @@ class Builder
         return new IndexingResult($this->connection->bulkStatement($params));
     }
 
+    /**
+     * @param $params
+     * @return array
+     */
+    public function destroy($params): array
+    {
+        return $this->connection->deleteStatement($params);
+    }
+
+    /**
+     * @param $params
+     * @return array
+     */
+    public function update($params): array
+    {
+        return $this->connection->updateStatement($params);
+    }
+
 }

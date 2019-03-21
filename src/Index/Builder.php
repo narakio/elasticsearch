@@ -27,6 +27,8 @@ class Builder
     }
 
     /**
+     * Create a new index
+     *
      * @param array $params
      * @return array
      */
@@ -36,6 +38,8 @@ class Builder
     }
 
     /**
+     * Delete an index
+     *
      * @param array $params
      * @return array
      */
@@ -54,12 +58,25 @@ class Builder
     }
 
     /**
+     * Delete a document from an index
+     *
      * @param $params
      * @return array
      */
     public function destroy($params): array
     {
         return $this->connection->deleteStatement($params);
+    }
+
+    /**
+     * Add a document in an index
+     *
+     * @param $params
+     * @return array
+     */
+    public function index($params): array
+    {
+        return $this->connection->indexStatement($params);
     }
 
     /**

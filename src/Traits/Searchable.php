@@ -1,5 +1,6 @@
 <?php namespace Naraki\Elasticsearch;
 
+use App\Models\Language;
 use Naraki\Elasticsearch\Facades\ElasticSearch;
 
 trait Searchable
@@ -37,10 +38,12 @@ trait Searchable
      * @param string $locale
      * @return string
      */
-    public function getLocaleDocumentIndex(string $locale = null): string
+    public function getLocaleDocumentIndex($locale = null): string
     {
         if (is_null($locale)) {
             $locale = app()->getLocale();
+        } elseif (is_int($locale)) {
+            $locale = Language::getLanguageName($locale, false);
         }
         return sprintf('%s.%s', $this->getDocumentIndexString(), $locale);
     }

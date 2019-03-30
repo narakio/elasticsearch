@@ -27,6 +27,11 @@ class Filter
             'type' => 'snowball',
             'language' => 'French'
         ],
+        'autocomplete_string' => [
+            'type' => 'edge_ngram',
+            'min_gram' => 1,
+            'max_gram' => 5,
+        ]
     ];
 
     /**

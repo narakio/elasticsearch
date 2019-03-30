@@ -183,12 +183,20 @@ class SearchResult
     }
 
     /**
+     * @param array $only
      * @return array
      */
-    public function source()
+    public function source($only = null): array
     {
-        return $this->hits->pluck('_source')->toArray();
-
+        return is_array($only)
+            ? $this->hits->pluck('_source')->map(function ($a) use ($only) {
+                $r = [];
+                foreach ($only as $o) {
+                    $r[$o] = $a[$o];
+                }
+                return $r;
+            })->toArray()
+            : $this->hits->pluck('_source')->toArray();
     }
 
     /**

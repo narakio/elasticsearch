@@ -33,8 +33,8 @@ class LumenServiceProvider extends ServiceProvider
         $this->app['router']->group([
             'namespace' => 'Naraki\Elasticsearch\Controllers',
         ], function ($r) {
-            $r->get('/search/{input}', ['uses' => 'Search@get']);
-            $r->post('/search[/{source}]', ['uses' => 'Search@post']);
+            $r->get('/search/user/{q}', ['uses' => 'Search@getUser']);
+            $r->post('/search/blog[/{source}]', ['uses' => 'Search@postBlog']);
         });
     }
 }

@@ -24,59 +24,6 @@ class Analyzer
      * @var string
      */
     private $name;
-    /**
-     * @var array
-     */
-    private static $builtInAnalyzers = [
-        'standard',
-        'simple',
-        'whitespace',
-        'stop',
-        'keyword',
-        'pattern',
-        'fingerprint',
-    ];
-
-    private $availableAnalyzers = [
-        'std_strip_en' => [
-            [
-                'lowercase',
-                'stop_en',
-                'snowball_en',
-            ],
-            [
-                'html_strip',
-                'quotes'
-            ]
-        ],
-        'std_strip_fr' => [
-            [
-                'lowercase',
-                'stop_fr',
-                'snowball_fr',
-                'asciifolding'
-            ],
-            [
-                'html_strip',
-                'quotes'
-            ]
-        ],
-        'std_stop_en' => [
-            [
-                'lowercase',
-                'stop_en',
-                'snowball_en',
-            ]
-        ],
-        'std_stop_fr' => [
-            [
-                'lowercase',
-                'stop_fr',
-                'snowball_fr',
-                'asciifolding'
-            ]
-        ]
-    ];
 
     /**
      *
@@ -126,19 +73,4 @@ class Analyzer
             'char_filter' => $this->getCharFilters()->getNames()
         ]);
     }
-
-
-
-    /**
-     * @param string $analyzer
-     * @return bool
-     */
-    public static function exists(string $analyzer): bool
-    {
-        $builtIn = array_flip(self::$builtInAnalyzers);
-        return isset($builtIn[$analyzer]);
-
-    }
-
-
 }

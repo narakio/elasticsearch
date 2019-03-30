@@ -21,10 +21,13 @@ class Search extends Controller
     }
 
     /**
+     * Having the source param means that we're doing a paginated search
+     * Without the source param, we're doing a simple search
+     *
      * @param string $source
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function post($source = null)
+    public function postBlog($source = null)
     {
         $input = app('request')->get('q');
         $size = app('request')->get('size');
@@ -52,6 +55,21 @@ class Search extends Controller
             ], Response::HTTP_OK);
         }
         return response(['status' => null, Response::HTTP_OK]);
+    }
+
+    /**
+     * @param string $q
+     * @return array
+     */
+    public function getUser($q)
+    {
+        $search = $this->es->search()
+            ->index('naraki.users.en')
+            ->type('main')
+            ->from(0)
+            ->size(7)
+            ->multiMatch(['username', 'full_name'], strip_tags($q));
+        return $search->get()->source(['username', 'full_name', 'avatar']);
     }
 
     /**

@@ -25,6 +25,15 @@ class Analysis
     ];
 
     /**
+     * Custom analyzers are defined here.
+     *
+     * Analyzer definition is read as a flat array by the Analyzer constructor which expects params in a certain order:
+     * First are filters,
+     * then Character filters
+     * then Tokenizer
+     * then Type
+     *
+     *
      * @var array
      */
     private $availableAnalyzers = [
@@ -65,7 +74,19 @@ class Analysis
                 'snowball_fr',
                 'asciifolding'
             ]
-        ]
+        ],
+        'std_autocomplete_string' => [
+            [
+                'lowercase',
+                'autocomplete_string'
+            ]
+        ],
+        'std_autocomplete_slug' => [
+            [
+                'word_delimiter',
+                'autocomplete_string',
+            ]
+        ],
     ];
 
     /**
@@ -97,7 +118,7 @@ class Analysis
         return array_filter([
             'analyzer' => $this->analyzers,
             'filter' => array_filter($this->filters),
-            'char_filter' =>array_filter($this->charFilters)
+            'char_filter' => array_filter($this->charFilters)
         ]);
     }
 

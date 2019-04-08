@@ -54,22 +54,36 @@ class Search extends Controller
                 'tags' => $tag
             ], Response::HTTP_OK);
         }
-        return response(['status' => null, Response::HTTP_OK]);
+
     }
 
     /**
-     * @param string $q
+     * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
+     */
+    public function postCheck()
+    {
+        return response([
+            'cnt' => $this->es->search()
+                ->index('naraki.users.en')
+                ->type('main')
+                ->match(strip_tags(app('request')->get('field')), strip_tags(app('request')->get('q')))
+                ->count()->count()
+        ], Response::HTTP_OK);
+    }
+
+    /**
      * @return array
      */
-    public function getUser($q)
+    public function postUser()
     {
-        $search = $this->es->search()
+        $q = app('request')->get('q');
+        return $this->es->count()
             ->index('naraki.users.en')
             ->type('main')
             ->from(0)
             ->size(7)
-            ->multiMatch(['username', 'full_name'], strip_tags($q));
-        return $search->get()->source(['username', 'full_name', 'avatar']);
+            ->multiMatch(['username', 'full_name'], strip_tags($q))
+            ->get()->source(['username', 'full_name', 'avatar']);
     }
 
     /**
@@ -81,13 +95,15 @@ class Search extends Controller
      */
     private function searchBlog($input, $size, $sort, $order)
     {
-        $search = $this->es->search()
-            ->index('naraki.blog_posts.en')
-            ->type('main')
-            ->from(0)
-            ->size($size)
-            ->matchPhrasePrefix('title', strip_tags($input));
-        return $this->sort($search, $sort, $order)->get()->source();
+        return $this->sort(
+            $this->es->search()
+                ->index('naraki.blog_posts.en')
+                ->type('main')
+                ->from(0)
+                ->size($size)
+                ->matchPhrasePrefix('title', strip_tags($input)),
+            $sort,
+            $order)->get()->source();
     }
 
     /**
@@ -98,11 +114,13 @@ class Search extends Controller
      */
     private function searchBlogPaginate($input, $sort, $order)
     {
-        $search = $this->es->search()
-            ->index('naraki.blog_posts.en')
-            ->type('main')
-            ->matchPhrasePrefix('title', strip_tags($input));
-        return $this->sort($search, $sort, $order)->paginateToSource(8);
+        return $this->sort(
+            $this->es->search()
+                ->index('naraki.blog_posts.en')
+                ->type('main')
+                ->matchPhrasePrefix('title', strip_tags($input)),
+            $sort,
+            $order)->paginateToSource(8);
     }
 
     /**

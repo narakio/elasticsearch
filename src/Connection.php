@@ -202,6 +202,15 @@ class Connection
     }
 
     /**
+     * @param array $search
+     * @return array
+     */
+    public function count(array $search)
+    {
+        return $this->elastic->count($search);
+    }
+
+    /**
      * Begin a fluent suggest query builder.
      *
      * @return SuggestionBuilder

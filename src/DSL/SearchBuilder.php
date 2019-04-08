@@ -3,6 +3,7 @@
 use App\Contracts\Searchable;
 use Naraki\Elasticsearch\Connection;
 use Naraki\Elasticsearch\Exception\InvalidArgumentException;
+use Naraki\Elasticsearch\Results\CountResult;
 use Naraki\Elasticsearch\Results\Paginator;
 use Naraki\Elasticsearch\Results\SearchResult;
 use Illuminate\Database\Eloquent\Model;
@@ -575,9 +576,9 @@ class SearchBuilder
      * @param string $preTag
      * @param string $postTag
      *
+     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      *
-     * @return \Naraki\Elasticsearch\DSL\SearchBuilder
      */
     public function highlight(
         $fields = ['_all' => []],
@@ -735,6 +736,15 @@ class SearchBuilder
         return $this;
     }
 
+    private function getDefaultParams()
+    {
+        return [
+            'index' => $this->getIndex(),
+            'type' => $this->getType(),
+            'body' => $this->toDSL(),
+        ];
+    }
+
     /**
      * Execute the search query against elastic and return the raw result.
      *
@@ -742,13 +752,7 @@ class SearchBuilder
      */
     public function getRaw()
     {
-        $params = [
-            'index' => $this->getIndex(),
-            'type' => $this->getType(),
-            'body' => $this->toDSL(),
-        ];
-
-        return $this->connection->searchStatement($params);
+        return $this->connection->searchStatement($this->getDefaultParams());
     }
 
     /**
@@ -758,6 +762,14 @@ class SearchBuilder
     public function get(): SearchResult
     {
         return new SearchResult($this->getRaw());
+    }
+
+    /**
+     * @return \Naraki\Elasticsearch\Results\CountResult
+     */
+    public function count(): CountResult
+    {
+        return new CountResult($this->connection->count($this->getDefaultParams()));
     }
 
     /**

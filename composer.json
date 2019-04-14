@@ -17,7 +17,7 @@
     },
   "autoload": {
     "psr-4": {
-      "Naraki\\Elasticsearch\\": "src/"
+      "Naraki\\Elasticsearch\\": ""
     }
   },
     "extra": {

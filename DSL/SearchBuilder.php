@@ -1,7 +1,7 @@
 <?php namespace Naraki\Elasticsearch\DSL;
 
-use App\Contracts\Searchable;
 use Naraki\Elasticsearch\Connection;
+use Naraki\Elasticsearch\Contracts\Searchable;
 use Naraki\Elasticsearch\Exception\InvalidArgumentException;
 use Naraki\Elasticsearch\Results\CountResult;
 use Naraki\Elasticsearch\Results\Paginator;
@@ -149,7 +149,7 @@ class SearchBuilder
 
     /**
      * @param array $attributes
-     * @return \App\Contracts\Searchable|\Illuminate\Database\Eloquent\Model
+     * @return \Naraki\Elasticsearch\Contracts\Searchable|\Illuminate\Database\Eloquent\Model
      */
     public function createModel(array $attributes = null): Searchable
     {

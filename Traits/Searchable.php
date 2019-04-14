@@ -1,6 +1,6 @@
 <?php namespace Naraki\Elasticsearch;
 
-use App\Models\Language;
+use Naraki\Core\Models\Language;
 use Naraki\Elasticsearch\Facades\ElasticSearch;
 
 trait Searchable

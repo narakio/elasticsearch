@@ -1,6 +1,6 @@
 {
     "name": "naraki/elasticsearch",
-    "description": "ElasticSearch provider for the naraki platform",
+    "description": "ElasticSearch provider for the Naraki platform",
     "keywords": ["laravel", "naraki"],
     "license": "MIT",
     "authors": [
